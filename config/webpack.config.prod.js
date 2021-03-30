@@ -41,18 +41,29 @@ module.exports ={
             }
           }
           },
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env']
-              }
-            }
-          }
         ],
-      }
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/ 
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        options: {
+            presets: [
+              ["@babel/preset-env", {
+              useBuiltIns: "usage",
+              corejs: "2.0.0"
+            }]
+            ],
+            "plugins": [
+              "@babel/plugin-proposal-class-properties"
+            ]
+          }
+        },
     ],
   },
   plugins: [
